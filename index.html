@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BGMI UC Store</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    body {
+      margin:0;
+      font-family:Arial;
+      background:#0f172a;
+      color:white;
+    }
+
+    header {
+      background:black;
+      padding:15px;
+      text-align:center;
+      font-size:22px;
+      font-weight:bold;
+    }
+
+    .banner img {
+      width:100%;
+      height:200px;
+      object-fit:cover;
+    }
+
+    .container {
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+
+    .card {
+      background:#1e293b;
+      width:200px;
+      margin:10px;
+      padding:10px;
+      border-radius:12px;
+      text-align:center;
+      transition:0.3s;
+      box-shadow:0 0 10px rgba(0,0,0,0.5);
+    }
+
+    .card:hover {
+      transform:scale(1.05);
+    }
+
+    .card img {
+      width:100%;
+      border-radius:10px;
+    }
+
+    .offer {
+      color:yellow;
+      font-size:12px;
+    }
+
+    button {
+      background:orange;
+      border:none;
+      padding:10px;
+      margin:5px;
+      border-radius:5px;
+      cursor:pointer;
+      width:90%;
+      font-weight:bold;
+    }
+
+    button:hover {
+      background:#ff9800;
+    }
+
+    input {
+      padding:10px;
+      width:90%;
+      margin:5px;
+      border-radius:5px;
+      border:none;
+    }
+
+    .box {
+      text-align:center;
+      margin:20px;
+      display:none;
+      background:#1e293b;
+      padding:15px;
+      border-radius:10px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  🎮 BGMI UC Store
+</header>
+
+<div class="banner">
+  <img src="https://images.unsplash.com/photo-1605902711622-cfb43c4437d1">
+</div>
+
+<div class="container">
+
+  <div class="card">
+    <img src="https://cdn-icons-png.flaticon.com/512/1041/1041916.png">
+    <h3>8000 UC</h3>
+    <p>₹1499</p>
+    <p class="offer">🔥 20% OFF</p>
+    <button onclick="selectPack('8000 UC',1499)">Buy Now</button>
+  </div>
+
+  <div class="card">
+    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+    <h3>16000 UC</h3>
+    <p>₹2800</p>
+    <p class="offer">🔥 Best Seller</p>
+    <button onclick="selectPack('16000 UC',2800)">Buy Now</button>
+  </div>
+
+  <div class="card">
+    <img src="https://cdn-icons-png.flaticon.com/512/2331/2331947.png">
+    <h3>24000 UC</h3>
+    <p>₹4200</p>
+    <button onclick="selectPack('24000 UC',4200)">Buy Now</button>
+  </div>
+
+  <div class="card">
+    <img src="https://cdn-icons-png.flaticon.com/512/2920/2920349.png">
+    <h3>32000 UC</h3>
+    <p>₹7000</p>
+    <button onclick="selectPack('32000 UC',7000)">Buy Now</button>
+  </div>
+
+  <div class="card">
+    <img src="https://cdn-icons-png.flaticon.com/512/3062/3062634.png">
+    <h3>64000 UC</h3>
+    <p>₹14000</p>
+    <p class="offer">🔥 Mega Offer</p>
+    <button onclick="selectPack('64000 UC',14000)">Buy Now</button>
+  </div>
+
+</div>
+
+<div class="box" id="formBox">
+  <h3>Enter Details</h3>
+
+  <input type="text" id="name" placeholder="Your Name">
+  <input type="text" id="uid" placeholder="BGMI UID">
+
+  <button onclick="pay()">💳 Pay Now</button>
+  <button onclick="order()">📲 Confirm Order</button>
+</div>
+
+<script>
+let selectedUC = "";
+let price = 0;
+
+function selectPack(uc, amount){
+  selectedUC = uc;
+  price = amount;
+  document.getElementById("formBox").style.display = "block";
+}
+
+function pay(){
+  window.location.href =
+  "upi://pay?pa=8949220131@slc&pn=BGMIStore&am="+price+"&cu=INR";
+}
+
+function order(){
+  let name = document.getElementById("name").value;
+  let uid = document.getElementById("uid").value;
+
+  if(name=="" || uid==""){
+    alert("Please fill details");
+    return;
+  }
+
+  let msg =
+  "BGMI UC ORDER\nName: "+name+
+  "\nUID: "+uid+
+  "\nPack: "+selectedUC+
+  "\nAmount: ₹"+price;
+
+  window.open("https://wa.me/918949220131?text="+encodeURIComponent(msg));
+}
+</script>
+
+</body>
+</html>
